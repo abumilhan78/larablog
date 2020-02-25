@@ -2,6 +2,7 @@
 use App\Mahasiswa;
 use App\Dosen;
 use App\Hobi;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,3 +73,22 @@ Route::get('eloquent', function() {
 
     return view('eloquent',compact('mahasiswa'));
 });
+
+Route::get('latihan-eloquent', function() {
+    // $hobi = Mahasiswa::get()->first();
+    // $sql = DB::table('mahasiswas')
+    // ->select('mahasiswas.nama','walis.nama as wali','dosens.nama as dosen_pembimbing','dosens.nipd as nipd_dosen')
+    // ->join('walis','walis.id_mahasiswa','=','mahasiswas.id')
+    // ->join('dosens','dosens.id','=','mahasiswas.id_dosen')
+    // ->first();
+    // dd($hobi);
+
+    $mahasiswa = Mahasiswa::with('wali','dosen','hobi')
+    ->where('nama','=','Dadang')
+    ->first();
+
+    return view('eloquent2', compact("mahasiswa"));
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
