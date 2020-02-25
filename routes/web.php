@@ -106,3 +106,6 @@ Route::get('tentang', function() {
 Route::get('kontak', function() {
     return view('kontak');
 });
+
+//CRUD
+Route::resource('dosen', 'DosenController');
