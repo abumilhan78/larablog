@@ -32,12 +32,12 @@
 									<td>{{$key->nama}}</td>
 									<td>{{$key->nipd}}</td>
 									<td>
-										<a href="" class="btn btn-outline-info">Lihat</a>
-										<a href="" class="btn btn-outline-warning">Edit</a>
-										<form action="/dosens/{{$key->id}}" method="post" class="d-inline">
+										<a href="{{route('dosen.show', $key->id)}}" class="btn btn-outline-info">Lihat</a>
+										<a href="{{route('dosen.edit', $key->id)}}" class="btn btn-outline-warning">Edit</a>
+										<form action="{{route('dosen.destroy', $key->id)}}" method="post" class="d-inline">
 						                    @method('delete')
 						                    @csrf
-						                    <button type="submit" class="btn btn-outline-danger">Hapus</button>
+						                    <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-outline-danger">Hapus</button>
 						                </form>
 									</td>
 								</tr>

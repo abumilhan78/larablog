@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -86,7 +91,7 @@ class DosenController extends Controller
                 'nama' => $request->nama,
                 'nipd' => $request->nipd
             ]);
-        return redirect()->route('dosen.index')->with(['message'=>'Data Dosen Berhasil Di Ubah']);
+        return redirect()->route('dosen.index')->with(['message'=>"Data $dosen->nama Berhasil Di Ubah"]);
     }
 
     /**
