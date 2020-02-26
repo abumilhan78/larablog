@@ -36,10 +36,11 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        $dosen = new Dosen();
-        $dosen->nama = $request->nama;
-        $dosen->nipd = $request->nipd;
-        $dosen->save();
+        // $dosen = new Dosen();
+        // $dosen->nama = $request->nama;
+        // $dosen->nipd = $request->nipd;
+        // $dosen->save();
+        Dosen::create($request->all());
         return redirect()->route('dosen.index')->with(['message'=>'Dosen Berhasil Dibuat']);
     }
 
@@ -51,8 +52,8 @@ class DosenController extends Controller
      */
     public function show(Dosen $dosen)
     {
-        $dos = Dosen::findOrFail($dosen);
-        return view('dosen.show', compact('dos'));
+        //$dos = Dosen::findOrFail($dosen);
+        return view('dosen.show', compact('dosen'));
     }
 
     /**
@@ -63,8 +64,8 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        $dos = Dosen::findOrFail($dosen);
-        return view('dosen.show', compact('dos'));
+        //$dos = Dosen::findOrFail($dosen);
+        return view('dosen.edit', compact('dosen'));
     }
 
     /**
@@ -76,10 +77,15 @@ class DosenController extends Controller
      */
     public function update(Request $request, Dosen $dosen)
     {
-        $dos = Dosen::findOrFail($dosen);
-        $dosen->nama = $request->nama;
-        $dosen->nipd = $request->nipd;
-        $dosen->save();
+        // $dos = Dosen::findOrFail($dosen);
+        // $dosen->nama = $request->nama;
+        // $dosen->nipd = $request->nipd;
+        // $dosen->save();
+        Dosen::where('id', $dosen->id)
+            ->update([
+                'nama' => $request->nama,
+                'nipd' => $request->nipd
+            ]);
         return redirect()->route('dosen.index')->with(['message'=>'Data Dosen Berhasil Di Ubah']);
     }
 
@@ -91,7 +97,8 @@ class DosenController extends Controller
      */
     public function destroy(Dosen $dosen)
     {
-        $dos = Dosen::findOrFail($dosen)->delete();
+        //$dos = Dosen::findOrFail($dosen)->delete();
+        Dosen::destroy($dosen->id);
         return redirect()->route('dosen.index')->with(['message'=>'Data Dosen Berhasil DiHapus']);
     }
 }
