@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class HobiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,8 @@ class HobiController extends Controller
      */
     public function index()
     {
-        //
+        $hobi = Hobi::all();
+        return view('hobi.index', compact('hobi'));
     }
 
     /**
@@ -24,7 +29,7 @@ class HobiController extends Controller
      */
     public function create()
     {
-        //
+        return view('hobi.create');
     }
 
     /**
@@ -35,7 +40,8 @@ class HobiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Hobi::create($request->all());
+        return redirect()->route('hobi.index')->with(['message'=>'Data Hobi Berhasil Dibuat']);
     }
 
     /**
@@ -46,7 +52,7 @@ class HobiController extends Controller
      */
     public function show(Hobi $hobi)
     {
-        //
+        return view('hobi.show', compact('hobi'));
     }
 
     /**
@@ -57,7 +63,7 @@ class HobiController extends Controller
      */
     public function edit(Hobi $hobi)
     {
-        //
+        return view('hobi.edit', compact('hobi'));
     }
 
     /**
@@ -69,7 +75,11 @@ class HobiController extends Controller
      */
     public function update(Request $request, Hobi $hobi)
     {
-        //
+        Hobi::where('id', $hobi->id)
+            ->update([
+                'hobi' => $request->hobi
+            ]);
+        return redirect()->route('hobi.index')->with(['message'=>"Data $hobi->hobi Berhasil Di Ubah"]);
     }
 
     /**
@@ -80,6 +90,7 @@ class HobiController extends Controller
      */
     public function destroy(Hobi $hobi)
     {
-        //
+        Hobi::destroy($hobi->id);
+        return redirect()->route('hobi.index')->with(['message'=>'Data Hobi Berhasil DiHapus']);
     }
 }

@@ -106,6 +106,10 @@ Route::get('tentang', function() {
 Route::get('kontak', function() {
     return view('kontak');
 });
-
+//rabu
 //CRUD
 Route::resource('dosen', 'DosenController');
+
+//kamis CRUD
+Route::resource('hobi', 'HobiController');
+Route::resource('mahasiswa', 'MahasiswaController');

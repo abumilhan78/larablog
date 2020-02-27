@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mahasiswa;
+use App\Dosen;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -14,7 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mhs = Mahasiswa::with('dosen')->get();
+        return view('mahasiswa.index', compact('mhs'));
     }
 
     /**
@@ -24,7 +26,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $dosen = Dosen::all();
+        return view('mahasiswa.create', compact('dosen'));
     }
 
     /**
@@ -35,7 +38,8 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mahasiswa::create($request->all());
+        return redirect()->route('mahasiswa.index')->with(['message'=>'Mahasiswa Berhasil Dibuat']);
     }
 
     /**
@@ -46,7 +50,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
@@ -57,7 +61,7 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        return view('dosen.mahasiswa', compact('mahasiswa'));
     }
 
     /**
@@ -69,7 +73,13 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        Mahasiswa::where('id', $mahasiswa->id)
+            ->update([
+                'nama' => $request->nama,
+                'nim' => $request->nim,
+                'id_dosen' => $request->id_dosen
+            ]);
+        return redirect()->route('mahasiswa.index')->with(['message'=>"Data $mahasiswa->nama Berhasil Di Ubah"]);
     }
 
     /**
