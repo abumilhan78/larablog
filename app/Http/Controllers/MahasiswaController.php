@@ -61,7 +61,8 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        return view('dosen.mahasiswa', compact('mahasiswa'));
+        $dosen = Dosen::all();
+        return view('mahasiswa.edit', compact('mahasiswa','dosen'));
     }
 
     /**

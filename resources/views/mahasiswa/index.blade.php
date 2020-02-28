@@ -34,9 +34,9 @@
 									<td>{{$key->nim}}</td>
 									<td>{{$key->dosen->nama}}</td>
 									<td>
-										<a href="{{route('hobi.show', $key->id)}}" class="btn btn-outline-info">Lihat</a>
-										<a href="{{route('hobi.edit', $key->id)}}" class="btn btn-outline-warning">Edit</a>
-										<form action="{{route('hobi.destroy', $key->id)}}" method="post" class="d-inline">
+										<a href="{{route('mahasiswa.show', $key->id)}}" class="btn btn-outline-info">Lihat</a>
+										<a href="{{route('mahasiswa.edit', $key->id)}}" class="btn btn-outline-warning">Edit</a>
+										<form action="{{route('mahasiswa.destroy', $key->id)}}" method="post" class="d-inline">
 						                    @method('delete')
 						                    @csrf
 						                    <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-outline-danger">Hapus</button>
