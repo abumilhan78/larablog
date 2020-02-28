@@ -91,6 +91,8 @@ class WaliController extends Controller
      */
     public function destroy(Wali $wali)
     {
-        //
+        Wali::destroy($wali->id);
+        return redirect()->route('wali.index')->with(['message'=>'Data Wali Berhasil DiHapus']);
+
     }
 }
