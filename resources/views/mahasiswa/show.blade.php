@@ -13,15 +13,15 @@
 						@csrf
 						<div class="form-group">
 							<label>Nama Mahasiswa</label>
-							<input type="text" name="nama" class="form-control" readonly>
+                        <input type="text" value="{{$mahasiswa->nama}}" name="nama" class="form-control" readonly>
 						</div>
 						<div class="form-group">
 							<label>Nomor Induk Mahasiswa</label>
-							<input type="text" name="nim" class="form-control" readonly>
+							<input type="text" value="{{$mahasiswa->nim}}" name="nim" class="form-control" readonly>
 						</div>
 						<div class="form-group">
 							<label>Dosen Pembimbing</label>
-							<input type="text" name="dosen" class="form-control" readonly>
+							<input type="text" value="{{$mahasiswa->dosen->nama}}" name="dosen" class="form-control" readonly>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-dark">Simpan</button>

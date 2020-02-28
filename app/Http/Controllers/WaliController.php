@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Wali;
+use App\Mahasiswa;
 use Illuminate\Http\Request;
 
 class WaliController extends Controller
@@ -14,7 +15,8 @@ class WaliController extends Controller
      */
     public function index()
     {
-        //
+        $wali = Wali::with('mahasiswa')->get();
+        return view('wali.index', compact('wali'));
     }
 
     /**
@@ -24,7 +26,8 @@ class WaliController extends Controller
      */
     public function create()
     {
-        //
+        $mhs = Mahasiswa::all();
+        return view('wali.create', compact('mhs'));
     }
 
     /**
@@ -35,7 +38,8 @@ class WaliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Wali::create($request->all());
+        return redirect()->route('wali.index')->with(['message'=>'Wali Berhasil Dibuat']);
     }
 
     /**
@@ -46,7 +50,7 @@ class WaliController extends Controller
      */
     public function show(Wali $wali)
     {
-        //
+        return view('wali.show', compact('wali'));
     }
 
     /**
@@ -57,7 +61,9 @@ class WaliController extends Controller
      */
     public function edit(Wali $wali)
     {
-        //
+
+        $mhs = Mahasiswa::all();
+        return view('wali.edit', compact('wali','mhs'));
     }
 
     /**
@@ -69,7 +75,12 @@ class WaliController extends Controller
      */
     public function update(Request $request, Wali $wali)
     {
-        //
+        Wali::where('id', $wali->id)
+            ->update([
+                'nama' => $request->nama,
+                'id_mahasiswa' => $request->id_mahasiswa
+            ]);
+        return redirect()->route('wali.index')->with(['message'=>"Data $wali->nama Berhasil Di Ubah"]);
     }
 
     /**

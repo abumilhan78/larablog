@@ -113,3 +113,6 @@ Route::resource('dosen', 'DosenController');
 //kamis CRUD
 Route::resource('hobi', 'HobiController');
 Route::resource('mahasiswa', 'MahasiswaController');
+
+//jumat CRUD
+Route::resource('wali','WaliController');
